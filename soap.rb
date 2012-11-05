@@ -5,10 +5,10 @@ require 'rexml/document'
 $wsdl_uri = "http://azuremd2.cloudapp.net/Service1.svc?wsdl"
 
 class NoSecret
-	def initialize (uri = $wsdl_uri, password = "geheim")
+	def initialize (uri = $wsdl_uri, password = "geheim", operation = "GetTheSecretPhrase")
 		@uri = URI(uri)
-		@operation = "GetTheSecretPhrase"
 		@password = password
+		@operation = operation
 	end
 
 	def encrypt
