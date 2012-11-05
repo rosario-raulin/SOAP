@@ -20,8 +20,11 @@ class NoSecret
 	private
 	def get_soap_action
 		doc = REXML::Document.new Net::HTTP::get(@uri)
-		e = doc.elements["*/wsdl:binding/wsdl:operation/soap:operation"]
-		e.attributes['soapAction']
+		doc.elements["*/wsdl:binding"].each { |e|
+			if (e.attributes['name'] == @operation)
+				return e.elements["soap:operation"].attributes['soapAction']
+			end
+		}
 	end
 	
 	def build_req_body
